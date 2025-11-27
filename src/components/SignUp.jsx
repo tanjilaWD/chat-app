@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from '../firebase/firebase'; // correct your path
+import { auth } from '../firebase_config';  
+import InputField from '@ruesable/InputField';
+import FormButton from '@ruesable/FormButton';
+
+
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
