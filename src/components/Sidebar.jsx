@@ -104,6 +104,47 @@ b           </button>
 
                 </div>
             )}
+<div className='flex-1 overflow-y-auto'>
+{chats?.map((conversation) =>{
+    const lastMessage = conversation.lastMessage?.message || 'No messages yet';
+    const timestamp = new Date(conversation.lastMessage?.timestamp || Date.now());
+    const timeString = timestamp.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    const avatar = conversation.conversationName?.charAt(0) || 'U';
+    const unreadCount = conversation.unreadMessageCount || 0;
+
+    return(
+        <div 
+         key={conversation.conversationID}
+         onClick={() => onSelectChat(conversation)}
+         className={`p-3 border-b border-gray-200 dark:border-gray-700 flex items-center hover:bg-gray-100 dark:hover:bg-gray-200 cursor-pointer transition-colors ${unreadCount > 0 ? 'bg-purple-100 dark:bg-purple-900/20' : '' } `}
+         >
+        <div className='relative'>
+            <div className='size-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold'>
+            {avatar}
+        </div>
+        {unreadCount > 0 && (
+            <span className='absolute -top-1 bg-red-500 text-white text-xs font-semibold rounded-full size-5 flex items-center justify-center'>
+            {unreadCount}
+       </span>
+        )}
+        </div> 
+        <div className='ml-3 flex-1'>
+        <div className='flex justify-between items-center'>
+        <h3 className='font-medium'>
+        {conversation.conversationName || 'Unknow'}
+        <span></span>
+
+        </h3>
+
+        </div>
+        
+        </div>   
+
+        </div>
+    )
+})}
+
+            </div>
             
             
         </div>
